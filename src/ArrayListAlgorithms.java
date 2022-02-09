@@ -149,7 +149,7 @@ public class ArrayListAlgorithms {
                 i--;
             }
             else{
-                wordList.add(wordList.get(i));
+                wordList.add(i, wordList.get(i));
                 i++;
             }
        }
