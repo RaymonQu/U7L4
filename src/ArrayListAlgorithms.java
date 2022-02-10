@@ -155,4 +155,84 @@ public class ArrayListAlgorithms {
        }
     }
 
+    /** Removes all duplicate values from an intList, leaving only the first
+     *  occurrence in the arrayList; for example, this method will modify
+     *  [1, 2, 5, 4, 2, 2, 1, 6, 4, 4, 8, 1, 7, 4, 2] --> [1, 2, 5, 4, 6, 8, 7]
+     *
+     *  DOES mutate (modify) elements in intList
+     *  PRECONDITION: intList.size() > 0
+     *
+     *  @param intList  intList of Integers
+     */
+    public static void removeDuplicates(ArrayList<Integer> intList)
+    {
+        for (int i = 0; i < intList.size(); i++){
+            for (int j = i + 1; j < intList.size(); j++){
+                if (j == intList.size()){
+                    break;
+                }
+                else if (intList.get(i) == intList.get(j)){
+                    intList.remove(j);
+                    j--;
+                }
+            }
+        }
+    }
+
+    /** Adds an uppercase version of each string directly AFTER the string
+     *  in wordList; for example, if wordList is ["hello", "my", "best", "friend"]
+     *  this this method modifies wordList to be:
+     *  ["hello", "HELLO", "my", "MY", "best", "BEST", "friend", "FRIEND"]
+     *
+     *  Assume all words have lowercase letters originally
+     *
+     *  DOES mutate (modify) elements in wordList
+     *  PRECONDITION: wordList.size() > 0
+     *
+     *  @param wordList  arraylist of Strings
+     */
+    public static void duplicateUpperAfter(ArrayList<String> wordList)
+    {
+        for (int i = 0; i < wordList.size(); i++) {
+            wordList.add(i + 1, wordList.get(i).toUpperCase());
+            i++;
+        }
+    }
+
+    /** Appends an uppercase version of each string to the END of of wordList;
+     *  the uppercase versions appear in the same order as the lowercase versions
+     *  for example, if wordList is ["hello", "my", "best", "friend"]
+     *  this this method modifies wordList to be:
+     *  ["hello", "my", "best", "friend", "HELLO", "MY", "BEST", "FRIEND"]
+     *
+     *  Assume all words have lowercase letters originally
+     *
+     *  DOES mutate (modify) elements in wordList
+     *  PRECONDITION: wordList.size() > 0
+     *
+     *  @param wordList  arraylist of Strings
+     */
+    public static void duplicateUpperEnd(ArrayList<String> wordList)
+    {
+        int fin = wordList.size();
+        for (int i = 0; i < fin; i++){
+            wordList.add((wordList.get(i).toUpperCase()));
+        }
+    }
+
+    /** Returns an arraylist of Strings that represents the input sentence parsed
+     *  into separate words (using a space: " " as the delimiter) and REVERSED
+     *  For example, if sentence = "This is my sentence!"
+     *  this method return [sentence!, my, is, This]
+     *
+     *  PRECONDITION: sentence does not end with a space
+     *
+     *  @param sentence  the input String that represents one or more words
+    separated by spaces
+     *  @return  new arraylist of Strings containing the words of sentence reversed
+     */
+    public static ArrayList<String> parseWordsAndReverse(String sentence)
+    {
+        
+    }
 }
