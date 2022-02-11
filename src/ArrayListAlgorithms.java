@@ -233,6 +233,104 @@ public class ArrayListAlgorithms {
      */
     public static ArrayList<String> parseWordsAndReverse(String sentence)
     {
-        
+        ArrayList<String> newSentence= new ArrayList<String>();
+        int whereToStart = 0;
+        for (int i = 0; i < sentence.length();i++){
+            if (sentence.substring(i, i + 1).equals(" ")){
+                newSentence.add(sentence.substring(whereToStart, i));
+                i++;
+                whereToStart = i;
+            }
+            if (sentence.substring(i).indexOf(" ") == -1){
+                newSentence.add(sentence.substring(i));
+                break;
+            }
+        }
+        for (int i = newSentence.size() - 1; i >= 0; i--){
+            newSentence.add(newSentence.get(i));
+            newSentence.remove(i);
+        }
+        return newSentence;
+    }
+    /** Removes all words from wordList that begin with "b" and inserts them at the
+     *  front of wordList; all "b" words that are moved should appear in the same order
+     *  in the modified arrayList as they did before being moved
+     *
+     *  For example, this method will take a wordList:
+     *  ["apple", "banana", "cherry", "donut", "bagel", "danish", "berry", "baguette", "soda"]
+     *  and modify it to
+     *  ["banana", "bagel", "berry", "baguette", "apple", "cherry", "donut", "danish", "soda"]
+     *
+     *  DOES mutate (modify) elements in wordList
+     *  PRECONDITIONS: wordList.size() > 0, all strings in wordList have at least one character
+     *
+     *  @param wordList  arraylist of words
+     */
+    public static void moveBWords(ArrayList<String> wordList)
+    {
+        ArrayList<String> newWordList = new ArrayList<>();
+        for (int i = wordList.size() - 1; i > 0; i--){
+            if (wordList.get(i).substring(0, 1).equals("b")){
+                newWordList.add(wordList.get(i));
+                System.out.println(wordList.get(i));
+                wordList.remove(i);
+                i++;
+            }
+        }
+        for (int i = 0; i < wordList.size(); i++){
+            newWordList.add(wordList.get(i));
+        }
+        wordList.clear();
+        for (int i = 0; i < newWordList.size(); i ++){
+            wordList.add(i, newWordList.get(i));
+        }
+    }
+
+    /** Returns arraylist of Integers that contain all mode(s) of the int array numList.
+     *  If elements in numList all appear exactly once, there is no mode, and this method
+     *  should return an empty list
+     *
+     *  For example, if numList is: [1, 2, 3, 2, 4, 5, 5, 6],
+     *  then numList contains two modes: 2, 5
+     *  and this method returns an arraylist containing 2 and 5 (in any order)
+     *  If numList is: [1, 2, 3, 2, 4, 5, 5, 6, 6, 7, 6],
+     *  then numList contains one mode: 6
+     *  and this method returns an arrayList containing 6
+     *  If numList is: [1, 2, 3, 4, 5, 6], then numList contains no mode
+     *  and this method returns an empty arrayList: []
+     *  If numList is: [2, 2, 2, 3, 3, 3, 4, 4, 4],
+     *  then numList contains three modes: 2, 3, 4
+     *  and this method returns an arrayList containing 2, 3, and 4 (in any order)
+     *
+     *  Does NOT mutate (modify) elements in numList
+     *  PRECONDITIONS: numList.length > 0
+     *
+     *  @param numList  numList of ints
+     */
+    public static ArrayList<Integer> modes(int[] numList)
+    {
+        int mostAppearances = 0;
+        int curStreak = 0;
+        ArrayList<Integer> theNumbers = new ArrayList<Integer>();
+        for (int i = 0; i < numList.length; i++){
+            curStreak = 0;
+            for (int j = i; j < numList.length; j++){
+                if (numList[i] == numList[j]){
+                    curStreak++;
+                }
+            }
+            if(curStreak > mostAppearances){
+                mostAppearances = curStreak;
+                theNumbers.clear();
+                theNumbers.add(numList[i]);
+            }
+            else if(curStreak == mostAppearances){
+                theNumbers.add(numList[i]);
+            }
+        }
+        if (mostAppearances == 1){
+            theNumbers.clear();
+        }
+        return theNumbers;
     }
 }
